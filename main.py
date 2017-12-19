@@ -1,19 +1,14 @@
-import get_time
-import get_data
-import calc
-import matplotlib.pyplot as plt
-import pylab
-import matplotlib.dates as mdates
-import pylab
 from io import BytesIO
 from pprint import pprint
 import credentials
 import requests
+import pickle
+from pathlib import Path
 
 my_athlete_id = "19826138"
 dad_athlete_id = "1140693"
 
-def get_starred_segments(athlete_id):
+def get_starred_segments(athlete_id): #get user starred segments
     url = 'https://www.strava.com/api/v3/athletes/'+athlete_id+'/segments/starred'
     header = {'Authorization': 'Bearer '+credentials.api_key}
     param = {'per_page':200, 'page':1}
@@ -29,7 +24,7 @@ def get_starred_segments(athlete_id):
         list_1.append(x['id'])
     return dict_1
 
-def leaderboard(seg_id):
+def leaderboard(seg_id): #return dictionary of leaderboard for segment
     url = 'https://www.strava.com/api/v3/segments/'+seg_id+'/leaderboard'
     header = {'Authorization': 'Bearer '+credentials.api_key}
     param = {'per_page':200, 'page':1}
@@ -48,15 +43,7 @@ def leaderboard(seg_id):
             count = len(dataset['entries'])
         return dataset
 
-def segment_efforts(athlete_id):
-    url = 'https://www.strava.com/api/v3/segment_efforts/'+athlete_id
-    header = {'Authorization': 'Bearer '+credentials.api_key}
-    param = {'per_page':200, 'page':1}
-    dataset = requests.get(url, headers=header, params=param).json()
-    print("SEGMENT EFFORTS")
-    pprint(dataset)
-
-def my_friends(athlete_id):
+def my_friends(athlete_id): #return dictionary of friends
     url = 'https://www.strava.com/api/v3/athletes/'+athlete_id+'/friends'
     header = {'Authorization': 'Bearer '+credentials.api_key}
     param = {'per_page':200, 'page':1}
@@ -72,17 +59,76 @@ def my_friends(athlete_id):
     pprint(dict_1)
     return dict_1
 
+def leaderboard_matches(seg_data,friend_dict):
+    #return a dictionary with a single segment data with friend and user data
+    seg_dict = {}
+    seg_dict['athletes'] = {}
+    for x in seg_data['entries']: #for user listed in leaderboard for segment
+        if str(my_athlete_id) == str(x['athlete_id']):
+            seg_dict['athletes'][str(my_athlete_id)] = {}
+            seg_dict['athletes'][my_athlete_id]['rank'] = x['rank']
+            seg_dict['athletes'][my_athlete_id]['elapsed_time'] = x['elapsed_time']
+
+        for user in friend_dict:
+            if friend_dict[user]['id'] == x['athlete_id']:
+                seg_dict['athletes'][friend_dict[user]['id']] = {}
+                seg_dict['athletes'][friend_dict[user]['id']]['rank'] = x['rank']
+                seg_dict['athletes'][friend_dict[user]['id']]['elapsed_time'] = x['elapsed_time']
+    return seg_dict
+
+def compare_record(record_dict,new_record_dict):
+    print("NA")
+    #remove any entries (segments) that aren't in one another
+    #for each segments
+    #if my user id exists
+    for segment in record_dict:
+        if len(record_dict[segment]['athletes']) > 1:
+            for athlete1 in record_dict[segment]['athletes']:
+                for athlete2 in new_record_dict[segment]['athletes']:
+
+                    print(record_dict[segment]['athletes'][athlete1])
+                    print(new_record_dict[segment]['athletes'][athlete2])
+
+
+
+
+new_record_dict = {}
 friend_dict = my_friends(my_athlete_id)
 starred_dict = get_starred_segments(my_athlete_id)
 
-for seg in starred_dict: #for each segment in my starred list
-    print(starred_dict[seg]['name'])
-    seg_data = leaderboard(str(starred_dict[seg]['id'])) #find learderboard information
-    print("ENTRY COUNT: "+str(seg_data['entry_count']))
-    for x in seg_data['entries']:
-        if str(my_athlete_id) == str(x['athlete_id']):
-            print("YOUR RANK: "+str(x['rank']))
-        for user in friend_dict:
-            if friend_dict[user]['id'] == x['athlete_id']:
-                print ("FRIEND "+str(friend_dict[user]['name'])+" RANK: "+str(x['rank']))
-    print()
+for n,seg in enumerate(starred_dict): #for each segment in my starred list
+    seg_count = n+1
+    new_record_dict[starred_dict[seg]['id']] = {} #create new dictionary to store data with seg ID as key
+
+    seg_data = leaderboard(str(starred_dict[seg]['id'])) #find learderboard information from single segment
+    seg_dict = leaderboard_matches(seg_data,friend_dict) #create dict based on your id and friends list
+
+    new_record_dict[starred_dict[seg]['id']] = seg_dict #adds segment dict to main dictionary as segment id as key
+    new_record_dict[starred_dict[seg]['id']]['name'] = starred_dict[seg]['name'] #set segment name in new dictionary
+
+#pprint(new_record_dict)
+#####
+record_file = Path("./record.dict")
+if record_file.is_file():
+#pricing import
+    pickle_in = open("record.dict","rb")
+    record_dict = pickle.load(pickle_in)
+
+    compare_record(record_dict,new_record_dict)
+
+    record_dict = new_record_dict
+
+    pickle_out = open("record.dict","wb")
+    pickle.dump(record_dict, pickle_out)
+    pickle_out.close()
+
+else:
+    f=open("record.dict","w+") #create file
+    f.close()
+
+    record_dict = new_record_dict #create limits dict and variables
+
+    pickle_out = open("record.dict","wb") #open file
+    pickle.dump(record_dict, pickle_out) #save limits dict to file
+    pickle_out.close()
+#####
