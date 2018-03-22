@@ -11,7 +11,9 @@ import credentials
 import requests
 
 my_athlete_id = "19826138"
+my_athlete_name = 'Jonathan H.'
 dad_athlete_id = "1140693"
+dan_athlete_name = 'Danielle C.'
 
 def get_starred_segments(athlete_id):
     url = 'https://www.strava.com/api/v3/athletes/'+athlete_id+'/segments/starred'
@@ -28,6 +30,9 @@ def get_starred_segments(athlete_id):
         dict_1[s]['city'] = x['city']
         list_1.append(x['id'])
     return dict_1
+
+def get_segment_info(seg_id):
+    return 0
 
 def leaderboard(seg_id):
     url = 'https://www.strava.com/api/v3/segments/'+seg_id+'/leaderboard'
@@ -63,6 +68,7 @@ def my_friends(athlete_id):
     dataset = requests.get(url, headers=header, params=param).json()
     dict_1 = {}
     list = []
+    pprint(dataset)
     for n,x in enumerate(dataset):
         s = n+1
         dict_1[s] = {}
@@ -72,17 +78,26 @@ def my_friends(athlete_id):
     pprint(dict_1)
     return dict_1
 
-friend_dict = my_friends(my_athlete_id)
+
+
+#friend_dict = my_friends(my_athlete_id)
 starred_dict = get_starred_segments(my_athlete_id)
 
+final_dict = {}
+
 for seg in starred_dict: #for each segment in my starred list
-    print(starred_dict[seg]['name'])
+    #print(starred_dict[seg]['name'])
     seg_data = leaderboard(str(starred_dict[seg]['id'])) #find learderboard information
-    print("ENTRY COUNT: "+str(seg_data['entry_count']))
+    #print("ENTRY COUNT: "+str(seg_data['entry_count']))
+    final_dict[starred_dict[seg]['id']] = {}
+    final_dict[starred_dict[seg]['id']]['name'] = starred_dict[seg]['name']
+    final_dict[starred_dict[seg]['id']]['entries'] = seg_data['entry_count']
     for x in seg_data['entries']:
-        if str(my_athlete_id) == str(x['athlete_id']):
-            print("YOUR RANK: "+str(x['rank']))
-        for user in friend_dict:
-            if friend_dict[user]['id'] == x['athlete_id']:
-                print ("FRIEND "+str(friend_dict[user]['name'])+" RANK: "+str(x['rank']))
-    print()
+        if str(dan_athlete_name) == str(x['athlete_name']):
+            final_dict[starred_dict[seg]['id']]['Danielle'] = x
+        if str(my_athlete_name) == str(x['athlete_name']):
+            final_dict[starred_dict[seg]['id']]['Jonathan'] = x
+
+
+
+pprint(final_dict)
