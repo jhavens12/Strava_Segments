@@ -1,6 +1,15 @@
 import ui #used for pythonista
 import console #used for pythonista
 
+def setup_widgets(v):
+    button1 = v['button1']
+    button2 = v['button2']
+    button3 = v['button3']
+    button4 = v['button4']
+    button5 = v['button5']
+    button6 = v['button6']
+    button7 = v['button7']
+    button8 = v['button8']
 
 def set_100_series(v):
 

@@ -68,18 +68,11 @@ def button_action_1(sender):
     button7.title = "Annoucement"
     button8.title = "Test"
     set_labels.set_100_series(v)
-    set_bales.set_200_series(v)
+    set_labels.set_200_series(v)
 
 v = ui.load_view()
 
-button1 = v['button1']
-button2 = v['button2']
-button3 = v['button3']
-button4 = v['button4']
-button5 = v['button5']
-button6 = v['button6']
-button7 = v['button7']
-button8 = v['button8']
+set_labels.setup_widgets(v)
 
 button1.action = button_action_1
 button1.title = "Test" #this works
