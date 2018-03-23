@@ -30,7 +30,7 @@ def set_200_series(v,old_dict,segment):
     v['label201'].text = str(old_dict[segment]['Jonathan']['start_time']) #my set date
 
     v['label102'].text = str("My Rank:")
-    v['label202'].text = str(old_dict[segment]['Jonathan']['rank']) #rank
+    v['label202'].text = str(old_dict[segment]['Jonathan']['rank'])+"/"+str(old_dict[segment]['entries']) #rank
 
     v['label103'].text = str("My Attempts:")
     v['label203'].text = str(old_dict[segment]['information']['athlete_segment_stats']['effort_count']) #my attempts
