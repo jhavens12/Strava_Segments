@@ -44,3 +44,6 @@ def set_200_series(v,old_dict,segment):
 
     v['label106'].text = str("CR Set By:")
     v['label206'].text = str(old_dict[segment]['cr']['athlete_name'])
+
+    polygraph = create_poly.run_and_graph(old_dict[segment]['information']['polyline']) #creates files for polyview
+    v['imageview1'].image = ui.Image.from_data(polygraph.getvalue())

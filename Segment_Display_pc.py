@@ -42,6 +42,7 @@ for seg in old_dict:
     if 'Jonathan_old' in old_dict[seg]:
         print("There is an old record for "+str(old_dict[old_seg]['information']['name']))
 
+pprint(old_dict)
 #set labels for pythonista?
 #set_labels.set_100_series()
 get_seg_data.print_stats(old_dict)
