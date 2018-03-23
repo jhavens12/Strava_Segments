@@ -71,7 +71,7 @@ def seg_button_pressed(sender):
 def set_button_titles(v,old_dict):
     button_dict = {}
     #need button dict of name of segment and ID of segment
-    for n,segment in enumerate(old_dict):
+    for n,segment in enumerate(old_dict): #limit to number of labels somehow
         button_name = 'button'+str(n)
         label_title = str(old_dict[segment]['information']['name'])
         button_dict[label_title] = segment #save button with segment id

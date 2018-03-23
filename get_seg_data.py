@@ -90,7 +90,7 @@ def seconds_format(elapsed):
 
 def convert_timestamp(i):
     dtobject = datetime.datetime.strptime(i, "%Y-%m-%dT%H:%M:%SZ")
-    return str(object.year)+"/"+str(object.month)+"/"+str(object.day)
+    return str(dtobject.year)+"/"+str(dtobject.month)+"/"+str(dtobject.day)
 
 def create_segment_dictionary(starred_dict):
     final_dict = {}
