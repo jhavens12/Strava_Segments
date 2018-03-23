@@ -59,32 +59,25 @@ with open(dictionary_file, 'w') as outfile:
 
 #display information down ehre
 
-def button_action_1(sender):
-    set_button_titles(v,old_dict)
-    # button2.title = "this"
-    # button3.title = "Is"
-    # button4.title = "a"
-    # button5.title = "Public"
-    # button6.title = "Service"
-    # button7.title = "Annoucement"
-    # button8.title = "Test"
-    # set_labels.set_100_series(v)
-    # set_labels.set_200_series(v)
+def refresh(sender):
+    button_dict = set_button_titles(v,old_dict)
+    pprint(button_dict)
+
 
 def set_button_titles(v,old_dict):
+    button_dict = {}
     for n,segment in enumerate(old_dict):
-        q = str(n+2)
-        button_name = 'button'+q
+        button_dict[button_name] = segment
+        button_name = 'button'+str(n)
         label_title = str(old_dict[segment]['information']['name'])
-        print(button_name)
-        print(label_title)
-        v[button_name].title(label_title)
+        v[button_name].title = label_title
+    return button_dict
 
 #setup variables
 v = ui.load_view()
 
 
-v['button1'].action = button_action_1
-v['button1'].title = "Refresh" #this works
+v['Refresh'].action = refresh #do refresh function
+v['Refresh'].title = "Refresh" #this works
 
 v.present(style='sheet', hide_title_bar=True)
