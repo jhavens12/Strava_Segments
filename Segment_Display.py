@@ -9,6 +9,7 @@ import requests
 import datetime
 from pathlib import Path
 import pickle
+import webbrowser
 
 import ui #used for pythonista
 import console #used for pythonista
@@ -88,6 +89,8 @@ def set_button_titles(v,old_dict):
 #setup variables
 
 refresh("nothing") #runs initial setup
-
 demo_url = "https://www.strava.com/segments/15957378"
-webbrowser.open_new(demo_url)
+callback = "googlechrome-x-callback://x-callback-url/open/?url="+demo_url
+
+
+webbrowser.open_new(callback)
