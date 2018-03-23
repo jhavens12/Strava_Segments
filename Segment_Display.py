@@ -13,6 +13,7 @@ import pickle
 import ui #used for pythonista
 import console #used for pythonista
 
+my_athlete_id = '19826138'
 v = ui.load_view()
 v.background_color = "#FC4C02" #strava orange
 v.present(style='sheet', hide_title_bar=True)
