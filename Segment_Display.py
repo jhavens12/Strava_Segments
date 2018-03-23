@@ -58,10 +58,27 @@ with open(dictionary_file, 'w') as outfile:
 
 #display information down ehre
 
+def button_action_1(sender):
+    button2.title = "this"
+    button3.title = "Is"
+    button4.title = "a"
+    button5.title = "Public"
+    button6.title = "Service"
+    button7.title = "Annoucement"
+    button8.title = "Test"
+
 v = ui.load_view()
 
 button1 = v['button1']
-#button1.action = button_action_1
-button1.title = "Test"
+button2 = v['button2']
+button3 = v['button3']
+button4 = v['button4']
+button5 = v['button5']
+button6 = v['button6']
+button7 = v['button7']
+button8 = v['button8']
+
+button1.action = button_action_1
+button1.title = "Test" #this works
 
 v.present(style='sheet', hide_title_bar=True)
