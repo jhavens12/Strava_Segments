@@ -87,12 +87,11 @@ def set_button_titles(v,old_dict):
     return button_dict
 
 def open_url(sender):
-    button_dict[sender.title]
-    demo_url = "strava://segments/"+seg_id
+    callback = "strava://segments/"+url_id
     webbrowser.open_new(callback)
 
 v['button400'].action = open_url #do refresh function
-v['button400'].title = "URL"
+v['button400'].title = "Open In Strava"
 
 #setup variables
 

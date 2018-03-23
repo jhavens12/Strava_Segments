@@ -47,4 +47,6 @@ def set_200_series(v,old_dict,segment):
     v['label107'].text = str("Set On:")
     v['label207'].text = str(old_dict[segment]['cr']['start_time'])
 
-    v['button400'].title = str(segment)
+    #v['button400'].title = str(segment)
+    global url_id
+    url_id = str(segment) #sets global url_id so the button works when called and do not have to pass the label as the id
