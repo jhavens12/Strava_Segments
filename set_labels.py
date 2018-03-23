@@ -45,3 +45,5 @@ def set_200_series(v,old_dict,segment):
 
     v['label107'].text = str("Set On:")
     v['label207'].text = str(old_dict[segment]['cr']['start_time'])
+
+    v['label400'].text = "https://www.strava.com/segments/"+str(segment)

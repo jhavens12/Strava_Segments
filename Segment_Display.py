@@ -32,7 +32,7 @@ else:
     old_dict = {}
 
 def download_data():
-    v['Refresh'].title = "Loading..." #this works
+    v['Refresh'].title = "Loading..."
     #gather new dictionary information
     starred_dict = get_seg_data.get_starred_segments(my_athlete_id)
     new_dict = get_seg_data.create_segment_dictionary(starred_dict)
