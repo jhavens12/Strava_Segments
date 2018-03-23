@@ -9,9 +9,6 @@ import datetime
 from pathlib import Path
 import pickle
 
-import ui #used for pythonista
-import console #used for pythonista
-
 my_athlete_id = "19826138"
 dad_athlete_id = "1140693"
 
@@ -47,7 +44,7 @@ for seg in old_dict:
 
 #set labels for pythonista?
 #set_labels.set_100_series()
-#get_seg_data.print_stats(old_dict)
+get_seg_data.print_stats(old_dict)
 
 #save to the history file - use OLD_DICT
 with open(dictionary_file, 'w') as outfile:
@@ -55,11 +52,3 @@ with open(dictionary_file, 'w') as outfile:
     pickle_out = open(dictionary_file,"wb")
     pickle.dump(old_dict, pickle_out)
     pickle_out.close()
-
-#display information down ehre
-
-v = ui.load_view()
-
-button1 = v['button1']
-#button1.action = button_action_1
-button1.title = "Test"
