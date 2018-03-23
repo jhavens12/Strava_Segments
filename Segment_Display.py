@@ -85,7 +85,7 @@ def set_button_titles(v,old_dict):
         for n,segment in enumerate(old_dict): #limit to number of labels somehow
             if n >= 12:
                 print("There are too many starred segments")
-                print("You are missing: "+str(old_dict[segment]['information']['name']))
+                print("Missing: "+str(old_dict[segment]['information']['name']))
             else:
                 button_name = 'button'+str(n)
                 label_title = str(old_dict[segment]['information']['name'])
