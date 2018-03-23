@@ -74,6 +74,9 @@ def refresh(sender):
 def seg_button_pressed(sender):
     #takes sender.title (name) and sets labels based on that
     set_labels.set_200_series(v,old_dict,button_dict[sender.title])
+    #when this button is pressed
+    global url_id
+    url_id = button_dict[sender.title]
 
 def set_button_titles(v,old_dict):
     button_dict = {}
