@@ -82,23 +82,22 @@ def set_button_titles(v,old_dict):
     button_dict = {}
     #need button dict of name of segment and ID of segment
     if len(old_dict.keys()) > 11:
-        print("There are too many starred segments")
-        c = 0
-        while c < 12:
-            for n,segment in enumerate(old_dict): #limit to number of labels somehow
-                c = n
-                button_name = 'button'+str(n)
-                label_title = str(old_dict[segment]['information']['name'])
-                button_dict[label_title] = segment #save button with segment id
-                v[button_name].title = label_title #set titles for buttons
-                v[button_name].action = seg_button_pressed
-    else:
         for n,segment in enumerate(old_dict): #limit to number of labels somehow
             button_name = 'button'+str(n)
             label_title = str(old_dict[segment]['information']['name'])
             button_dict[label_title] = segment #save button with segment id
             v[button_name].title = label_title #set titles for buttons
             v[button_name].action = seg_button_pressed
+            if n == 12:
+                print("There are too many starred segments")
+                break
+    # else:
+    #     for n,segment in enumerate(old_dict): #limit to number of labels somehow
+    #         button_name = 'button'+str(n)
+    #         label_title = str(old_dict[segment]['information']['name'])
+    #         button_dict[label_title] = segment #save button with segment id
+    #         v[button_name].title = label_title #set titles for buttons
+    #         v[button_name].action = seg_button_pressed
 
     return button_dict
 
