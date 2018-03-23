@@ -13,6 +13,10 @@ import pickle
 import ui #used for pythonista
 import console #used for pythonista
 
+v = ui.load_view()
+v.background_color = "#FC4C02" #strava orange
+v.present(style='sheet', hide_title_bar=True)
+
 my_athlete_id = "19826138"
 dad_athlete_id = "1140693"
 
@@ -80,10 +84,8 @@ def set_button_titles(v,old_dict):
     return button_dict
 
 #setup variables
-v = ui.load_view()
-
 
 v['Refresh'].action = refresh #do refresh function
 v['Refresh'].title = "Refresh" #this works
 
-v.present(style='sheet', hide_title_bar=True)
+refresh("nothing") #runs initial setup
