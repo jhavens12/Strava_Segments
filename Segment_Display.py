@@ -84,6 +84,6 @@ v = ui.load_view()
 
 
 v['button1'].action = button_action_1
-button1.title = "Refresh" #this works
+v['button1'].title = "Refresh" #this works
 
 v.present(style='sheet', hide_title_bar=True)
