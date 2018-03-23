@@ -17,12 +17,10 @@ def set_200_series(v,old_dict,segment):
         print("There is an old record for "+str(old_dict[segment]['information']['name']))
         #v['label300'].text = str(old_dict[segment]['Jonathan_old']['hms'])
         v['label300'].text = str("UPDATED")
-        #v['label301'].text = str(old_dict[segment]['Jonathan_old']['start_time'])
-        #v['label302'].text = str(old_dict[segment]['Jonathan_old']['rank'])
-        #v['label303'].text = str(old_dict[segment]['information']['athlete_segment_stats']['effort_count'])
-        #v['label304'].text = str(old_dict[segment]['cr']['hms'])
-        #v['label305'].text = str(old_dict[segment]['Jonathan_old']['hms'] - old_dict[segment]['cr']['hms'])
-        #v['label306'].text = str()
+        v['label301'].text = str(old_dict[segment]['Jonathan_old']['start_time'])
+        v['label302'].text = str(old_dict[segment]['Jonathan_old']['rank'])
+        v['label305'].text = str(old_dict[segment]['Jonathan_old']['hms'] - old_dict[segment]['cr']['hms'])
+
 
     v['label100'].text = str("My Time:")
     v['label200'].text = str(old_dict[segment]['Jonathan']['hms']) #my time
@@ -44,6 +42,3 @@ def set_200_series(v,old_dict,segment):
 
     v['label106'].text = str("CR Set By:")
     v['label206'].text = str(old_dict[segment]['cr']['athlete_name'])
-
-    polygraph = create_poly.run_and_graph(old_dict[segment]['information']['polyline']) #creates files for polyview
-    v['imageview1'].image = ui.Image.from_data(polygraph.getvalue())
