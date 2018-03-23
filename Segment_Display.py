@@ -68,7 +68,7 @@ def seg_button_pressed(sender):
     #if statement, if sender
     print(sender.title)
     #button_dict[sender_title] - should give you the ID of the segment
-    set_labels.set_200_series(v,old_dict,button_dict[sender_title])
+    set_labels.set_200_series(v,old_dict,button_dict[sender.title])
 
 def set_button_titles(v,old_dict):
     button_dict = {}
