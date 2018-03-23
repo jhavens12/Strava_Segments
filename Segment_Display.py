@@ -18,10 +18,9 @@ v.background_color = "#FC4C02" #strava orange
 v.present(style='sheet', hide_title_bar=True)
 v['Refresh'].title = "Loading..." #this works
 
-my_athlete_id = "19826138"
-dad_athlete_id = "1140693"
-
 dictionary_file = Path('./History.dict')
+
+global old_dict
 
 if dictionary_file.is_file():
     pickle_in = open(dictionary_file,"rb")
@@ -31,39 +30,44 @@ else:
     f.close()
     old_dict = {}
 
-#gather new dictionary information
-starred_dict = get_seg_data.get_starred_segments(my_athlete_id)
-new_dict = get_seg_data.create_segment_dictionary(starred_dict)
+def download_data():
+    v['Refresh'].title = "Loading..." #this works
+    #gather new dictionary information
+    starred_dict = get_seg_data.get_starred_segments(my_athlete_id)
+    new_dict = get_seg_data.create_segment_dictionary(starred_dict)
 
-for new_seg in new_dict:
-    for old_seg in old_dict:
-        if new_seg == old_seg: #id matches
-            if new_dict[new_seg]['Jonathan']['rank'] != old_dict[old_seg]['Jonathan']['rank']:#rank no longer matches
-                print("Rank has changed for: "+str(old_dict[old_seg]['information']['name'])) #print that it has changed
-                old_dict[old_seg]['Jonathan_old'] = old_dict[old_seg]['Jonathan'] #store old jonathan as jonathan_old
-                old_dict[old_seg]['Jonathan_old']['change_occurred'] = datetime.datetime.now() #timestamp it
-    if new_seg not in old_dict: #what about if we star a new segment? need to save it to old_dict
-        print("We have a new starred segment: "+str(new_dict[new_seg]['information']['name']))
-        old_dict[new_seg] = new_dict[new_seg] #save new segment in old dict
+    for new_seg in new_dict:
+        for old_seg in old_dict:
+            if new_seg == old_seg: #id matches
+                if new_dict[new_seg]['Jonathan']['rank'] != old_dict[old_seg]['Jonathan']['rank']:#rank no longer matches
+                    print("Rank has changed for: "+str(old_dict[old_seg]['information']['name'])) #print that it has changed
+                    old_dict[old_seg]['Jonathan_old'] = old_dict[old_seg]['Jonathan'] #store old jonathan as jonathan_old
+                    old_dict[old_seg]['Jonathan_old']['change_occurred'] = datetime.datetime.now() #timestamp it
+        if new_seg not in old_dict: #what about if we star a new segment? need to save it to old_dict
+            print("We have a new starred segment: "+str(new_dict[new_seg]['information']['name']))
+            old_dict[new_seg] = new_dict[new_seg] #save new segment in old dict
 
-#do stuff in here for pythonista, set up the labels
-for seg in old_dict:
-    if 'Jonathan_old' in old_dict[seg]:
-        print("There is an old record for "+str(old_dict[old_seg]['information']['name']))
+    #do stuff in here for pythonista, set up the labels
+    for seg in old_dict:
+        if 'Jonathan_old' in old_dict[seg]:
+            print("There is an old record for "+str(old_dict[old_seg]['information']['name']))
 
-#save to the history file - use OLD_DICT
-with open(dictionary_file, 'w') as outfile:
-    #json.dump(history_dict, outfile)
-    pickle_out = open(dictionary_file,"wb")
-    pickle.dump(old_dict, pickle_out)
-    pickle_out.close()
+    #save to the history file - use OLD_DICT
+    with open(dictionary_file, 'w') as outfile:
+        #json.dump(history_dict, outfile)
+        pickle_out = open(dictionary_file,"wb")
+        pickle.dump(old_dict, pickle_out)
+        pickle_out.close()
 
 #display information down ehre
 
 def refresh(sender):
+    download_data()
     global button_dict #make global on each refresh
     button_dict = set_button_titles(v,old_dict)
     #button dict is buttonid as key and segid as value
+    v['Refresh'].action = refresh #do refresh function
+    v['Refresh'].title = "Refresh" #this works
 
 def seg_button_pressed(sender):
     #takes sender.title (name) and sets labels based on that
@@ -81,8 +85,5 @@ def set_button_titles(v,old_dict):
     return button_dict
 
 #setup variables
-
-v['Refresh'].action = refresh #do refresh function
-v['Refresh'].title = "Refresh" #this works
 
 refresh("nothing") #runs initial setup

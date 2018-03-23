@@ -38,7 +38,7 @@ def set_200_series(v,old_dict,segment):
     v['label204'].text = str(old_dict[segment]['cr']['hms']) #record time
 
     v['label105'].text = str("Difference:")
-    v['label205'].text = str(old_dict[segment]['cr']['hms'] - old_dict[segment]['Jonathan']['hms']) #behind b
+    v['label205'].text = str(old_dict[segment]['Jonathan']['hms'] - old_dict[segment]['cr']['hms']) #behind b
 
     v['label106'].text = str("CR Set By:")
     v['label206'].text = str(old_dict[segment]['cr']['athlete_name'])
