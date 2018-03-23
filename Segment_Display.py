@@ -67,8 +67,8 @@ def button_action_1(sender):
     button6.title = "Service"
     button7.title = "Annoucement"
     button8.title = "Test"
-    set_labels.set_100_series()
-    set_bales.set_200_series()
+    set_labels.set_100_series(v)
+    set_bales.set_200_series(v)
 
 v = ui.load_view()
 

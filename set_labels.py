@@ -2,7 +2,7 @@ import ui #used for pythonista
 import console #used for pythonista
 
 
-def set_100_series():
+def set_100_series(v):
 
     label100= v['label100']
     label100.text = str("100")
@@ -26,7 +26,7 @@ def set_100_series():
     label106.text = str()
 
 
-def set_200_series():
+def set_200_series(v):
 
     label200= v['label200']
     label200.text = str("200")
