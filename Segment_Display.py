@@ -71,6 +71,8 @@ def button_action_1(sender):
     set_labels.set_200_series(v)
 
 #setup variables
+v = ui.load_view()
+
 button1 = v['button1']
 button2 = v['button2']
 button3 = v['button3']
@@ -87,9 +89,6 @@ label103= v['label103']
 label104= v['label104']
 label105= v['label105']
 label106= v['label106']
-
-
-v = ui.load_view()
 
 set_labels.setup_widgets(v)
 
