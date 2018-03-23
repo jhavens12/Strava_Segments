@@ -4,25 +4,25 @@ import console #used for pythonista
 def set_100_series(v):
 
     #label100= v['label100']
-    label100.text = str("100")
+    v['label100'].text = str("100")
 
     #label101= v['label101']
-    label101.text = str("series")
+    v['label101'].text = str("series")
 
     #label102= v['label102']
-    label102.text = str("labels")
+    v['label102'].text = str("labels")
 
     #label103= v['label103']
-    label103.text = str()
+    v['label103'].text = str()
 
     #label104= v['label104']
-    label104.text = str()
+    v['label104'].text = str()
 
     #label105= v['label105']
-    label105.text = str()
+    v['label105'].text = str()
 
     #label106= v['label106']
-    label106.text = str()
+    v['label106'].text = str()
 
 
 def set_200_series(v):

@@ -82,15 +82,15 @@ button6 = v['button6']
 button7 = v['button7']
 button8 = v['button8']
 
-label100= v['label100']
-label101= v['label101']
-label102= v['label102']
-label103= v['label103']
-label104= v['label104']
-label105= v['label105']
-label106= v['label106']
+# label100= v['label100']
+# label101= v['label101']
+# label102= v['label102']
+# label103= v['label103']
+# label104= v['label104']
+# label105= v['label105']
+# label106= v['label106']
 
-set_labels.setup_widgets(v)
+#set_labels.setup_widgets(v)
 
 button1.action = button_action_1
 button1.title = "Test" #this works
