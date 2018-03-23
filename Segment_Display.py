@@ -72,12 +72,9 @@ def button_action_1(sender):
     # set_labels.set_200_series(v)
 
 def set_button_titles(v,old_dict):
-    v['button2'].title(str(old_dict[0]['information']['name']))
-    v['button3'].title(str(old_dict[1]['information']['name']))
-    v['button4'].title(str(old_dict[2]['information']['name']))
-    v['button5'].title(str(old_dict[3]['information']['name']))
-    v['button6'].title(str(old_dict[4]['information']['name']))
-    v['button7'].title(str(old_dict[5]['information']['name']))
+    for n,segment in enumerate(old_dict):
+        q = n+2
+        v['button'+str(q)].title(str(old_dict[segment]['information']['name']))
 
 #setup variables
 v = ui.load_view()
