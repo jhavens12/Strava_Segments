@@ -114,6 +114,7 @@ def create_segment_dictionary(starred_dict):
         final_dict[starred_dict[seg]['id']]['cr']['start_time'] = \
             convert_timestamp(final_dict[starred_dict[seg]['id']]['cr']['start_date_local'])
 
+        #set up Jonathan dictionary
         for x in seg_data['entries']:
             if str(my_athlete_name) == str(x['athlete_name']):
                 final_dict[starred_dict[seg]['id']]['Jonathan'] = x

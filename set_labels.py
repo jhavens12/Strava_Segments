@@ -13,25 +13,33 @@ def set_100_series(v):
 
 
 def set_200_series(v,old_dict,segment):
-    print("Set 200 series called")
-    print("Segment: "+str(segment))
+    if 'Jonathan_old' in old_dict[segment]:
+        print("There is an old record for "+str(old_dict[segment]['information']['name']))
+        #v['label300'].text = str(old_dict[segment]['Jonathan_old']['hms'])
+        #v['label301'].text = str(old_dict[segment]['Jonathan_old']['start_time'])
+        #v['label302'].text = str(old_dict[segment]['Jonathan_old']['rank'])
+        #v['label303'].text = str(old_dict[segment]['information']['athlete_segment_stats']['effort_count'])
+        #v['label304'].text = str(old_dict[segment]['cr']['hms'])
+        #v['label305'].text = str(old_dict[segment]['Jonathan_old']['hms'] - old_dict[segment]['cr']['hms'])
+        #v['label306'].text = str()
+
     v['label100'].text = str("My Time:")
     v['label200'].text = str(old_dict[segment]['Jonathan']['hms']) #my time
 
     v['label101'].text = str("Set On:")
     v['label201'].text = str(old_dict[segment]['Jonathan']['start_time']) #my set date
 
-    v['label102'].text = str("Current Rank:")
+    v['label102'].text = str("My Rank:")
     v['label202'].text = str(old_dict[segment]['Jonathan']['rank']) #rank
 
-    v['label103'].text = str("Attempt Count:")
+    v['label103'].text = str("My Attempts:")
     v['label203'].text = str(old_dict[segment]['information']['athlete_segment_stats']['effort_count']) #my attempts
 
     v['label104'].text = str("CR:")
     v['label204'].text = str(old_dict[segment]['cr']['hms']) #record time
 
-    v['label105'].text = str("Behind By:")
-    v['label205'].text = str(old_dict[segment]['Jonathan']['hms'] - old_dict[segment]['cr']['hms']) #behind by
+    v['label105'].text = str("Diff:")
+    v['label205'].text = str(old_dict[segment]['Jonathan']['hms'] - old_dict[segment]['cr']['hms']) #behind b
 
-    v['label106'].text = str("CR Set On:")
-    v['label206'].text = str()
+    v['label106'].text = str("CR Set By:")
+    v['label206'].text = str(old_dict[segment]['cr']['athlete_name'])
