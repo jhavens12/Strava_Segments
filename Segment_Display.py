@@ -74,7 +74,10 @@ def button_action_1(sender):
 def set_button_titles(v,old_dict):
     for n,segment in enumerate(old_dict):
         q = n+2
-        v['button'+str(q)].title(str(old_dict[segment]['information']['name']))
+        button_name = 'button'+str(q)
+        label_title = str(old_dict[segment]['information']['name'])
+
+        v[button_name].title(label_title)
 
 #setup variables
 v = ui.load_view()
