@@ -1,5 +1,6 @@
 import ui #used for pythonista
 import console #used for pythonista
+import webbrowser
 
 def set_100_series(v):
 
@@ -46,4 +47,4 @@ def set_200_series(v,old_dict,segment):
     v['label107'].text = str("Set On:")
     v['label207'].text = str(old_dict[segment]['cr']['start_time'])
 
-    v['label400'].text = "https://www.strava.com/segments/"+str(segment)
+    v['button400'].title = str(segment)
