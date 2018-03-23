@@ -89,7 +89,8 @@ def seconds_format(elapsed):
     return datetime.timedelta(seconds=elapsed)
 
 def convert_timestamp(i):
-    return datetime.datetime.strptime(i, "%Y-%m-%dT%H:%M:%SZ")
+    dtobject = datetime.datetime.strptime(i, "%Y-%m-%dT%H:%M:%SZ")
+    return str(object.year)+"/"+str(object.month)+"/"+str(object.day)
 
 def create_segment_dictionary(starred_dict):
     final_dict = {}
@@ -101,6 +102,7 @@ def create_segment_dictionary(starred_dict):
         final_dict[starred_dict[seg]['id']]['information'] = get_segment_info(str(starred_dict[seg]['id']))
         final_dict[starred_dict[seg]['id']]['name'] = starred_dict[seg]['name']
         final_dict[starred_dict[seg]['id']]['entries'] = seg_data['entry_count']
+
         try:
             final_dict[starred_dict[seg]['id']]['cr'] = seg_data['entries'][0] #set up course record dict
         except Exception:
