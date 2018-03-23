@@ -76,24 +76,29 @@ def seg_button_pressed(sender):
     set_labels.set_200_series(v,old_dict,button_dict[sender.title])
     #when this button is pressed
     global url_id
-    url_id = button_dict[sender.title]
+    url_id = str(button_dict[sender.title])
 
 def set_button_titles(v,old_dict):
     button_dict = {}
     #need button dict of name of segment and ID of segment
     for n,segment in enumerate(old_dict): #limit to number of labels somehow
-        button_name = 'button'+str(n)
-        label_title = str(old_dict[segment]['information']['name'])
-        button_dict[label_title] = segment #save button with segment id
-        v[button_name].title = label_title #set titles for buttons
-        v[button_name].action = seg_button_pressed
+        while n < 12:
+            button_name = 'button'+str(n)
+            label_title = str(old_dict[segment]['information']['name'])
+            button_dict[label_title] = segment #save button with segment id
+            v[button_name].title = label_title #set titles for buttons
+            v[button_name].action = seg_button_pressed
+        if n > 11:
+            print("There are too many favorite segments to display")
+
     return button_dict
 
 def open_url(sender):
+    #sender is not used as label is static
     callback = "strava://segments/"+url_id
     webbrowser.open_new(callback)
 
-v['button400'].action = open_url #do refresh function
+v['button400'].action = open_url #set to open url
 v['button400'].title = "Open In Strava"
 
 #setup variables
