@@ -81,15 +81,15 @@ def seg_button_pressed(sender):
 def set_button_titles(v,old_dict):
     button_dict = {}
     #need button dict of name of segment and ID of segment
-    for n,segment in enumerate(old_dict): #limit to number of labels somehow
-        while n < 12:
+    while n < 12:
+        for n,segment in enumerate(old_dict): #limit to number of labels somehow
             button_name = 'button'+str(n)
             label_title = str(old_dict[segment]['information']['name'])
             button_dict[label_title] = segment #save button with segment id
             v[button_name].title = label_title #set titles for buttons
             v[button_name].action = seg_button_pressed
-        if n > 11:
-            print("There are too many favorite segments to display")
+    # if n > 11:
+    #         print("There are too many favorite segments to display")
 
     return button_dict
 
