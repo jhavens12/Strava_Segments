@@ -60,39 +60,30 @@ with open(dictionary_file, 'w') as outfile:
 #display information down ehre
 
 def button_action_1(sender):
-    button2.title = "this"
-    button3.title = "Is"
-    button4.title = "a"
-    button5.title = "Public"
-    button6.title = "Service"
-    button7.title = "Annoucement"
-    button8.title = "Test"
-    set_labels.set_100_series(v)
-    set_labels.set_200_series(v)
+    set_button_titles(v,old_dict)
+    # button2.title = "this"
+    # button3.title = "Is"
+    # button4.title = "a"
+    # button5.title = "Public"
+    # button6.title = "Service"
+    # button7.title = "Annoucement"
+    # button8.title = "Test"
+    # set_labels.set_100_series(v)
+    # set_labels.set_200_series(v)
+
+def set_button_titles(v,old_dict):
+    v['button2'].title(str(old_dict[0]['information']['name'])
+    v['button3'].title(str(old_dict[1]['information']['name'])
+    v['button4'].title(str(old_dict[2]['information']['name'])
+    v['button5'].title(str(old_dict[3]['information']['name'])
+    v['button6'].title(str(old_dict[4]['information']['name'])
+    v['button7'].title(str(old_dict[5]['information']['name'])
 
 #setup variables
 v = ui.load_view()
 
-button1 = v['button1']
-button2 = v['button2']
-button3 = v['button3']
-button4 = v['button4']
-button5 = v['button5']
-button6 = v['button6']
-button7 = v['button7']
-button8 = v['button8']
 
-# label100= v['label100']
-# label101= v['label101']
-# label102= v['label102']
-# label103= v['label103']
-# label104= v['label104']
-# label105= v['label105']
-# label106= v['label106']
-
-#set_labels.setup_widgets(v)
-
-button1.action = button_action_1
-button1.title = "Test" #this works
+v['button1'].action = button_action_1
+button1.title = "Refresh" #this works
 
 v.present(style='sheet', hide_title_bar=True)
