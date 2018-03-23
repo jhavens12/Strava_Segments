@@ -1,6 +1,7 @@
 import get_time
 import get_seg_data
 import calc
+import set_labels
 from io import BytesIO
 from pprint import pprint
 import credentials
@@ -66,6 +67,8 @@ def button_action_1(sender):
     button6.title = "Service"
     button7.title = "Annoucement"
     button8.title = "Test"
+    set_labels.set_100_series()
+    set_bales.set_200_series()
 
 v = ui.load_view()
 
