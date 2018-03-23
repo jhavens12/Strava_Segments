@@ -88,3 +88,6 @@ def set_button_titles(v,old_dict):
 #setup variables
 
 refresh("nothing") #runs initial setup
+
+demo_url = "https://www.strava.com/segments/15957378"
+webbrowser.open_new(demo_url)
