@@ -13,11 +13,13 @@ def set_100_series(v,old_dict,segment):
 
 
 def set_200_series(v,old_dict,segment):
+    print("Set 200 series called")
+    print("Segment: "+str(segment))
 
     v['label200'].text = str(old_dict[segment]['Jonathan']['hms']) #my time
     v['label201'].text = str(old_dict[segment]['Jonathan']['start_time']) #my set date
     v['label202'].text = str(old_dict[segment]['Jonathan']['rank']) #rank
     v['label203'].text = str(old_dict[segment]['information']['athlete_segment_stats']['effort_count']) #my attempts
-    v['label204'].text = str(old_dict[segment]['cr']['hms'])) #record time
+    v['label204'].text = str(old_dict[segment]['cr']['hms']) #record time
     v['label205'].text = str(old_dict[segment]['Jonathan']['hms'] - old_dict[segment]['cr']['hms']) #behind by
     v['label206'].text = str()

@@ -63,7 +63,9 @@ def refresh(sender):
     button_dict = set_button_titles(v,old_dict)
     #button dict is buttonid as key and segid as value
 
-set_labels.set_200_series(v,old_dict,segment)
+def seg_button_pressed(sender):
+    #if statement, if sender
+    print(sender)
 
 def set_button_titles(v,old_dict):
     button_dict = {}
@@ -72,7 +74,8 @@ def set_button_titles(v,old_dict):
         label_title = str(old_dict[segment]['information']['name'])
         button_dict[button_name] = segment #save button with segment id
         v[button_name].title = label_title #set titles for buttons
-        v[button_name].action = set_labels.set_200_series(v,old_dict,segment) #set actions for buttons
+        #v[button_name].action = set_labels.set_200_series(v,old_dict,segment) #set actions for buttons
+        v[button_name].action = seg_button_pressed
     return button_dict
 
 #setup variables
