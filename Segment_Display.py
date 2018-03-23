@@ -61,16 +61,18 @@ with open(dictionary_file, 'w') as outfile:
 
 def refresh(sender):
     button_dict = set_button_titles(v,old_dict)
-    pprint(button_dict)
+    #button dict is buttonid as key and segid as value
 
+set_labels.set_200_series(v,old_dict,segment)
 
 def set_button_titles(v,old_dict):
     button_dict = {}
     for n,segment in enumerate(old_dict):
-        button_dict[button_name] = segment
         button_name = 'button'+str(n)
         label_title = str(old_dict[segment]['information']['name'])
-        v[button_name].title = label_title
+        button_dict[button_name] = segment #save button with segment id
+        v[button_name].title = label_title #set titles for buttons
+        v[button_name].action = set_labels.set_200_series(v,old_dict,segment) #set actions for buttons
     return button_dict
 
 #setup variables
