@@ -16,6 +16,7 @@ import console #used for pythonista
 v = ui.load_view()
 v.background_color = "#FC4C02" #strava orange
 v.present(style='sheet', hide_title_bar=True)
+v['Refresh'].title = "Loading..." #this works
 
 my_athlete_id = "19826138"
 dad_athlete_id = "1140693"
@@ -49,10 +50,6 @@ for new_seg in new_dict:
 for seg in old_dict:
     if 'Jonathan_old' in old_dict[seg]:
         print("There is an old record for "+str(old_dict[old_seg]['information']['name']))
-
-#set labels for pythonista?
-#set_labels.set_100_series()
-#get_seg_data.print_stats(old_dict)
 
 #save to the history file - use OLD_DICT
 with open(dictionary_file, 'w') as outfile:
