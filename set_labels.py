@@ -22,7 +22,11 @@ def set_200_series(v,old_dict,segment):
         v['label301'].text = str(old_dict[segment]['Jonathan_old']['start_time'])
         v['label302'].text = str(old_dict[segment]['Jonathan_old']['rank'])
         v['label305'].text = str(old_dict[segment]['Jonathan_old']['hms'] - old_dict[segment]['cr']['hms'])
-
+    else:
+        v['label300'].text = str()
+        v['label301'].text = str()
+        v['label302'].text = str()
+        v['label305'].text = str()
 
     v['label100'].text = str("My Time:")
     v['label200'].text = str(old_dict[segment]['Jonathan']['hms']) #my time
