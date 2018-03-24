@@ -26,6 +26,12 @@ else:
 starred_dict = get_seg_data.get_starred_segments(my_athlete_id)
 new_dict = get_seg_data.create_segment_dictionary(starred_dict)
 
+for x in starred_dict:
+    print(starred_dict[x]['id'])
+
+for x in new_dict:
+    print(x)
+
 for new_seg in new_dict:
     for old_seg in old_dict:
         if new_seg == old_seg: #id matches
@@ -42,10 +48,10 @@ for seg in old_dict:
     if 'Jonathan_old' in old_dict[seg]:
         print("There is an old record for "+str(old_dict[old_seg]['information']['name']))
 
-pprint(old_dict)
+#pprint(old_dict)
 #set labels for pythonista?
 #set_labels.set_100_series()
-get_seg_data.print_stats(old_dict)
+#get_seg_data.print_stats(old_dict)
 
 #save to the history file - use OLD_DICT
 with open(dictionary_file, 'w') as outfile:

@@ -58,11 +58,12 @@ def download_data():
 
     display_dict = {} #use this to filter out anything thats not in "Starred" - keeping it below still updates all segments
     for seg in old_dict:
-        if seg in starred_dict: #check if segment in old dict is in current starred dictionary
-            print("segment is starred")
-            display_dict[seg] = old_dict[seg] #take entry from old dict and put in to display
-        else:
-            print("segment is not starred")
+        for starred_seg in starred_dict:
+            if seg == starred_dict[starred_seg]['id']: #check if segment in old dict is in current starred dictionary
+                print("segment is starred")
+                display_dict[seg] = old_dict[seg] #take entry from old dict and put in to display
+            else:
+                print("segment is not starred")
 
     if len(display_dict) > 12:
         v.close() #close view
