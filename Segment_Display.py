@@ -10,6 +10,7 @@ import datetime
 from pathlib import Path
 import pickle
 import webbrowser
+import sys
 
 import ui #used for pythonista
 import console #used for pythonista
@@ -60,14 +61,7 @@ def download_data():
     for seg in old_dict:
         for starred_seg in starred_dict:
             if seg == starred_dict[starred_seg]['id']: #check if segment in old dict is in current starred dictionary
-                print("segment is starred")
                 display_dict[seg] = old_dict[seg] #take entry from old dict and put in to display
-            else:
-                print("segment is not starred")
-
-    if len(display_dict) > 12:
-        v.close() #close view
-        print("You have too many starred segments, unstar some and try again")
 
     #do stuff in here for pythonista, set up the labels
     for seg in old_dict:
@@ -80,6 +74,11 @@ def download_data():
         pickle_out = open(dictionary_file,"wb")
         pickle.dump(old_dict, pickle_out) #save old_dict as it has all of the data
         pickle_out.close()
+
+    if len(display_dict) > 12:
+        v.close() #close view
+        print("You have too many starred segments, unstar some and try again")
+        sys.exit()
 
     return display_dict
 #display information down ehre
