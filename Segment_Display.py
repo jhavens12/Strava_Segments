@@ -38,48 +38,68 @@ def download_data():
     starred_dict = get_seg_data.get_starred_segments(my_athlete_id)
     new_dict = get_seg_data.create_segment_dictionary(starred_dict)
 
+    #new_dict is the freshly pulled information
+    #old_dict is the imported information from file
+
     for new_seg in new_dict:
         for old_seg in old_dict:
-            if new_seg == old_seg: #id matches
+            if new_seg == old_seg: #segment id matches each other
                 if new_dict[new_seg]['Jonathan']['rank'] != old_dict[old_seg]['Jonathan']['rank']:#rank no longer matches
                     print("Rank has changed for: "+str(old_dict[old_seg]['information']['name'])) #print that it has changed
-                    old_dict[old_seg]['Jonathan_old'] = old_dict[old_seg]['Jonathan'] #store old jonathan as jonathan_old
-                    old_dict[old_seg]['Jonathan_old']['change_occurred'] = datetime.datetime.now() #timestamp it
-                    old_dict[old_seg]['Jonathan'] = new_dict[new_seg]['Jonathan'] #save the new info
+                    #need to wipe out previous historical_data if exists so it doesn't create a big chain
+                    historical_data = old_dict[old_seg]
+                    old_dict[old_seg] = new_dict[new_seg]
+                    old_dict[old_seg]['historical_data'] = historical_data
+                    old_dict[old_seg]['historical_data']['timestamp'] = datetime.datetime.now()
+
         if new_seg not in old_dict: #what about if we star a new segment? need to save it to old_dict
             print("We have a new starred segment: "+str(new_dict[new_seg]['information']['name']))
             old_dict[new_seg] = new_dict[new_seg] #save new segment in old dict
 
+    display_dict = {} #use this to filter out anything thats not in "Starred" - keeping it below still updates all segments
+    for seg in old_dict:
+        if seg in starred_dict: #check if segment in old dict is in current starred dictionary
+            print("segment is starred")
+            display_dict[seg] = old_dict[seg] #take entry from old dict and put in to display
+        else:
+            print("segment is not starred")
+
+    if len(display_dict) > 12:
+        v.close() #close view
+        print("You have too many starred segments, unstar some and try again")
+
     #do stuff in here for pythonista, set up the labels
     for seg in old_dict:
-        if 'Jonathan_old' in old_dict[seg]:
+        if 'historical_data' in old_dict[seg]:
             print("There is an old record for "+str(old_dict[old_seg]['information']['name']))
 
     #save to the history file - use OLD_DICT
     with open(dictionary_file, 'w') as outfile:
         #json.dump(history_dict, outfile)
         pickle_out = open(dictionary_file,"wb")
-        pickle.dump(old_dict, pickle_out)
+        pickle.dump(old_dict, pickle_out) #save old_dict as it has all of the data
         pickle_out.close()
 
+    return display_dict
 #display information down ehre
 
 def refresh(sender):
-    download_data()
+    global display_dict
+    display_dict = download_data()
     global button_dict #make global on each refresh
-    button_dict = set_button_titles(v,old_dict)
+    button_dict = set_button_titles(v,display_dict)
     #button dict is buttonid as key and segid as value
     v['Refresh'].action = refresh #do refresh function
     v['Refresh'].title = "Refresh" #this works
 
 def seg_button_pressed(sender):
     #takes sender.title (name) and sets labels based on that
-    set_labels.set_200_series(v,old_dict,button_dict[sender.title])
+    set_labels.set_200_series(v,display_dict,button_dict[sender.title])
     #when this button is pressed
     global url_id
     url_id = str(button_dict[sender.title])
 
-def set_button_titles(v,old_dict):
+def set_button_titles(v,old_dict): #this is passed display dict not old dict
     button_dict = {}
     #need button dict of name of segment and ID of segment
     #if len(old_dict.keys()) > 11:
