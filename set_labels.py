@@ -16,8 +16,9 @@ def set_100_series(v):
 def set_200_series(v,old_dict,segment):
     if 'Jonathan_old' in old_dict[segment]:
         print("There is an old record for "+str(old_dict[segment]['information']['name']))
+        print()
         #v['label300'].text = str(old_dict[segment]['Jonathan_old']['hms'])
-        v['label300'].text = str("UPDATED")
+        v['label300'].text = str(old_dict[segment]['Jonathan_old']['hms'])
         v['label301'].text = str(old_dict[segment]['Jonathan_old']['start_time'])
         v['label302'].text = str(old_dict[segment]['Jonathan_old']['rank'])
         v['label305'].text = str(old_dict[segment]['Jonathan_old']['hms'] - old_dict[segment]['cr']['hms'])

@@ -45,6 +45,7 @@ def download_data():
                     print("Rank has changed for: "+str(old_dict[old_seg]['information']['name'])) #print that it has changed
                     old_dict[old_seg]['Jonathan_old'] = old_dict[old_seg]['Jonathan'] #store old jonathan as jonathan_old
                     old_dict[old_seg]['Jonathan_old']['change_occurred'] = datetime.datetime.now() #timestamp it
+                    old_dict[old_seg]['Jonathan'] = new_dict[new_seg]['Jonathan'] #save the new info
         if new_seg not in old_dict: #what about if we star a new segment? need to save it to old_dict
             print("We have a new starred segment: "+str(new_dict[new_seg]['information']['name']))
             old_dict[new_seg] = new_dict[new_seg] #save new segment in old dict
