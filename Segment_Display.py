@@ -85,6 +85,7 @@ def download_data():
 #display information down ehre
 
 def refresh(sender):
+    v['Refresh'].title = "Loading..."
     global display_dict
     display_dict = download_data()
     global button_dict #make global on each refresh
@@ -102,13 +103,7 @@ def seg_button_pressed(sender):
 
 def set_button_titles(v,old_dict): #this is passed display dict not old dict
     button_dict = {}
-    #need button dict of name of segment and ID of segment
-    #if len(old_dict.keys()) > 11:
-    for n,segment in enumerate(old_dict): #limit to number of labels somehow
-        #if n >= 12:
-            #print("There are too many starred segments")
-            #print("Missing: "+str(old_dict[segment]['information']['name']))
-        #else:
+    for n,segment in enumerate(old_dict):
         button_name = 'button'+str(n)
         label_title = str(old_dict[segment]['information']['name']) + " ("+str(old_dict[segment]['Jonathan']['rank'])+")"
         button_dict[label_title] = segment #save button with segment id
