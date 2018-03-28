@@ -75,6 +75,7 @@ def download_data():
         pickle.dump(old_dict, pickle_out) #save old_dict as it has all of the data
         pickle_out.close()
 
+    #checks to see if there are more entries than labels
     if len(display_dict) > 12:
         v.close() #close view
         print("You have too many starred segments, unstar some and try again")
@@ -109,7 +110,7 @@ def set_button_titles(v,old_dict): #this is passed display dict not old dict
             #print("Missing: "+str(old_dict[segment]['information']['name']))
         #else:
         button_name = 'button'+str(n)
-        label_title = str(old_dict[segment]['information']['name'])
+        label_title = str(old_dict[segment]['information']['name']) + " ("+str(old_dict[segment]['Jonathan']['rank'])+")"
         button_dict[label_title] = segment #save button with segment id
         v[button_name].title = label_title #set titles for buttons
         v[button_name].action = seg_button_pressed
