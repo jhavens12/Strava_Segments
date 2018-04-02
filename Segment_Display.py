@@ -109,15 +109,15 @@ def set_button_titles(v,old_dict): #this is passed display dict not old dict
         button_dict[label_title] = segment #save button with segment id
 
         v[button_name].border_width = 1
-        v[button_name].tint_color = 'white'#"RGBA(1.000000,0.285714,0.000000,1.000000)"
+        v[button_name].tint_color = 'black'#"RGBA(1.000000,0.285714,0.000000,1.000000)"
         v[button_name].border_color = 'white'#"RGBA(1.000000,0.767857,0.458333,1.000000)"
         v[button_name].corner_radius = 1
-        v[button_name].background_color = "orange" #"RGBA(1.000000,1.000000,1.000000,1.000000)"
+        v[button_name].background_color = "#01B2FC" #"RGBA(1.000000,1.000000,1.000000,1.000000)"
         v[button_name].title = label_title #set titles for buttons
         v[button_name].action = seg_button_pressed
         if 'historical_data' in old_dict[segment]:
             if old_dict[segment]['historical_data']['timestamp'] > (datetime.datetime.now() - datetime.timedelta(days=7)):
-                v[button_name].background_color = 'yellow'
+                v[button_name].background_color = '#0135FC'
                 v[button_name].tint_color = 'white'
 
     return button_dict
@@ -129,9 +129,9 @@ def open_url(sender):
 
 v['button400'].action = open_url #set to open url
 v['button400'].border_width = 1
-v['button400'].tint_color = 'white'
+v['button400'].tint_color = 'black'
 v['button400'].border_color = 'white'
-v['button400'].background_color = "orange"
+v['button400'].background_color = "#01B2FC"
 v['button400'].title = "Open In Strava"
 
 
