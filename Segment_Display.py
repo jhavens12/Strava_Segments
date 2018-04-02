@@ -16,9 +16,23 @@ import ui #used for pythonista
 import console #used for pythonista
 
 my_athlete_id = '19826138'
+
+w,h = ui.get_screen_size()
+
+bh = 32 #button height
+bw = w/2 #button width
+sp = 15 #spacing
+smg = 5 #side margin
+tmg = 20 #top_margin
+
 v = ui.load_view()
+v = ui.View(frame = (0,0,w,h))
 v.background_color = "#FC4C02" #strava orange
+
+label_view =  ui.ScrollView(frame=(smg, tmg, w/2, h), background_color='white')
+
 v.present(style='sheet', hide_title_bar=True)
+
 v['Refresh'].title = "Loading..." #this works
 
 dictionary_file = Path('./History.dict')
@@ -108,17 +122,22 @@ def set_button_titles(v,old_dict): #this is passed display dict not old dict
         label_title = str(old_dict[segment]['information']['name']) + " ("+str(old_dict[segment]['Jonathan']['rank'])+")"
         button_dict[label_title] = segment #save button with segment id
 
-        v[button_name].border_width = 1
-        v[button_name].tint_color = 'black'#"RGBA(1.000000,0.285714,0.000000,1.000000)"
-        v[button_name].border_color = 'white'#"RGBA(1.000000,0.767857,0.458333,1.000000)"
-        v[button_name].corner_radius = 1
-        v[button_name].background_color = "#01B2FC" #"RGBA(1.000000,1.000000,1.000000,1.000000)"
-        v[button_name].title = label_title #set titles for buttons
-        v[button_name].action = seg_button_pressed
+        btn_tmg = (tmg+sp)*n #determine y position
+        button_name = ui.Button(name = button_name, bg_color ='white', frame = (0, btn_tmg, bw, bh))
+        button_name.border_width = 1
+        button_name.tint_color = 'black'#"RGBA(1.000000,0.285714,0.000000,1.000000)"
+        button_name.border_color = 'white'#"RGBA(1.000000,0.767857,0.458333,1.000000)"
+        button_name.corner_radius = 1
+        button_name.background_color = "#01B2FC" #"RGBA(1.000000,1.000000,1.000000,1.000000)"
+        button_name.title = label_title #set titles for buttons
+        button_name.action = seg_button_pressed
         if 'historical_data' in old_dict[segment]:
             if old_dict[segment]['historical_data']['timestamp'] > (datetime.datetime.now() - datetime.timedelta(days=7)):
-                v[button_name].background_color = '#0135FC'
-                v[button_name].tint_color = 'white'
+                button_name.background_color = '#0135FC'
+                button_name.tint_color = 'white'
+        label_view.add_subview(button_name)
+
+    label_view.content_size = (w/2,(tmg+sp)*len(button_dict)+bh+sp)
 
     return button_dict
 
