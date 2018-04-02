@@ -114,7 +114,7 @@ def set_button_titles(v,old_dict): #this is passed display dict not old dict
         if 'historical_data' in old_dict[segment]:
             if old_dict[segment]['historical_data']['timestamp'] > (datetime.datetime.now() - datetime.timedelta(days=7)):
                 v[button_name].background_color = 'red'
-                v[button_name].text_color = 'white'
+                v[button_name].tint_color = 'white'
 
     return button_dict
 
