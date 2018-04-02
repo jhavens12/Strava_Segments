@@ -76,7 +76,7 @@ def download_data():
         pickle_out.close()
 
     #checks to see if there are more entries than labels
-    if len(display_dict) > 12:
+    if len(display_dict) > 14:
         v.close() #close view
         print("You have too many starred segments, unstar some and try again")
         sys.exit()
@@ -109,10 +109,10 @@ def set_button_titles(v,old_dict): #this is passed display dict not old dict
         button_dict[label_title] = segment #save button with segment id
 
         v[button_name].border_width = 1
-        v[button_name].tint_color = "RGBA(1.000000,0.285714,0.000000,1.000000)"
-        v[button_name].border_color = "RGBA(1.000000,0.767857,0.458333,1.000000)"
+        v[button_name].tint_color = 'orange'#"RGBA(1.000000,0.285714,0.000000,1.000000)"
+        v[button_name].border_color = 'white'#"RGBA(1.000000,0.767857,0.458333,1.000000)"
         v[button_name].corner_radius = 1
-        v[button_name].background_color = "RGBA(1.000000,1.000000,1.000000,1.000000)"
+        v[button_name].background_color = "white" #"RGBA(1.000000,1.000000,1.000000,1.000000)"
         v[button_name].title = label_title #set titles for buttons
         v[button_name].action = seg_button_pressed
         if 'historical_data' in old_dict[segment]:
