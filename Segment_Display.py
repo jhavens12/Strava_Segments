@@ -75,8 +75,6 @@ def download_data():
         pickle.dump(old_dict, pickle_out) #save old_dict as it has all of the data
         pickle_out.close()
 
-    pprint(old_dict)
-
     #checks to see if there are more entries than labels
     if len(display_dict) > 12:
         v.close() #close view
@@ -109,6 +107,12 @@ def set_button_titles(v,old_dict): #this is passed display dict not old dict
         button_name = 'button'+str(n)
         label_title = str(old_dict[segment]['information']['name']) + " ("+str(old_dict[segment]['Jonathan']['rank'])+")"
         button_dict[label_title] = segment #save button with segment id
+
+        v[button_name].border_width = 1
+        v[button_name].tint_color = "RGBA(1.000000,0.285714,0.000000,1.000000)"
+        v[button_name].border_color = "RGBA(1.000000,0.767857,0.458333,1.000000)"
+        v[button_name].corner_radius = 1
+        v[button_name].background_color = "RGBA(1.000000,1.000000,1.000000,1.000000)"
         v[button_name].title = label_title #set titles for buttons
         v[button_name].action = seg_button_pressed
         if 'historical_data' in old_dict[segment]:
@@ -123,8 +127,15 @@ def open_url(sender):
     callback = "strava://segments/"+url_id
     webbrowser.open_new(callback)
 
-v['button400'].action = open_url #set to open url
-v['button400'].title = "Open In Strava"
+# v['button400'].action = open_url #set to open url
+# v['button400'].title = "Open In Strava"
+#
+# v['button11'].title = "button11" #stock button
+# v['button11'].background_color = ""
+# v['button12'].tint_color = "black" #has label
+# v['button13'] #invisible
+# v['button14'] #invisible
+# #background_color, tint_color, action, title
 
 #setup variables
 
