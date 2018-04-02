@@ -75,6 +75,8 @@ def download_data():
         pickle.dump(old_dict, pickle_out) #save old_dict as it has all of the data
         pickle_out.close()
 
+    pprint(old_dict)
+
     #checks to see if there are more entries than labels
     if len(display_dict) > 12:
         v.close() #close view
@@ -110,7 +112,9 @@ def set_button_titles(v,old_dict): #this is passed display dict not old dict
         v[button_name].title = label_title #set titles for buttons
         v[button_name].action = seg_button_pressed
         if 'historical_data' in old_dict[segment]:
-            v[button_name].background_color = 'blue'
+            if old_dict[segment]['historical_data']['timestamp'] > (datetime.datetime.now() - datetime.timedelta(days=7)):
+                v[button_name].background_color = 'red'
+                v[button_name].text_color = 'white'
 
     return button_dict
 
