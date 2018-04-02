@@ -21,7 +21,7 @@ w,h = ui.get_screen_size()
 
 bh = 32 #button height
 bw = w/2 #button width
-sp = 15 #spacing
+sp = 12 #spacing
 smg = 5 #side margin
 tmg = 70 #top_margin for label_view
 
@@ -29,7 +29,7 @@ v = ui.load_view() #this grabs UI elements from pyUI file
 #v = ui.View(frame = (0,0,w,h)) #this creates a new view without UI file
 v.background_color = "#FC4C02" #strava orange
 
-label_view =  ui.ScrollView(frame=(smg, tmg, w/2, h), background_color='white')
+label_view =  ui.ScrollView(frame=(smg, tmg, w/2, h-tmg), background_color='white')
 v.present(style='sheet', hide_title_bar=True)
 v['Refresh'].title = "Loading..." #this works
 
@@ -136,7 +136,7 @@ def set_button_titles(v,old_dict): #this is passed display dict not old dict
                 button_name.tint_color = 'white'
         label_view.add_subview(button_name)
 
-    label_view.content_size = (w/2,(tmg+sp)*len(button_dict)+bh+sp)
+    label_view.content_size = (w/2,len(button_dict)*(sp+bh))
     v.add_subview(label_view)
     return button_dict
 
