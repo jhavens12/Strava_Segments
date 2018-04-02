@@ -21,7 +21,7 @@ w,h = ui.get_screen_size()
 
 bh = 32 #button height
 bw = w/2 #button width
-sp = 12 #spacing
+sp = 10 #spacing
 smg = 5 #side margin
 tmg = 70 #top_margin for label_view
 
@@ -29,7 +29,7 @@ v = ui.load_view() #this grabs UI elements from pyUI file
 #v = ui.View(frame = (0,0,w,h)) #this creates a new view without UI file
 v.background_color = "#FC4C02" #strava orange
 
-label_view =  ui.ScrollView(frame=(smg, tmg, w/2, h-tmg), background_color='white')
+label_view =  ui.ScrollView(frame=(smg, tmg, w/2, (h-(h/4.5))), background_color="#FC4C02")
 v.present(style='sheet', hide_title_bar=True)
 v['Refresh'].title = "Loading..." #this works
 
@@ -87,11 +87,11 @@ def download_data():
         pickle.dump(old_dict, pickle_out) #save old_dict as it has all of the data
         pickle_out.close()
 
-    #checks to see if there are more entries than labels
-    if len(display_dict) > 14:
-        v.close() #close view
-        print("You have too many starred segments, unstar some and try again")
-        sys.exit()
+    # #checks to see if there are more entries than labels
+    # if len(display_dict) > 14:
+    #     v.close() #close view
+    #     print("You have too many starred segments, unstar some and try again")
+    #     sys.exit()
 
     return display_dict
 #display information down ehre
