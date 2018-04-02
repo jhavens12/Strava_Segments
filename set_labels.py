@@ -17,16 +17,23 @@ def set_200_series(v,old_dict,segment):
     if 'historical_data' in old_dict[segment]:
         print("There is an old record for "+str(old_dict[segment]['information']['name']))
         print()
-        #v['label300'].text = str(old_dict[segment]['historical_data']['hms'])
         v['label300'].text = str(old_dict[segment]['historical_data']['Jonathan']['hms'])
         v['label301'].text = str(old_dict[segment]['historical_data']['Jonathan']['start_time'])
-        v['label302'].text = str(old_dict[segment]['historical_data']['Jonathan']['rank'])
+        v['label302'].text = str(old_dict[segment]['historical_data']['Jonathan']['rank'])+"/"+str(old_dict[segment]['historical_data']['entries'])
+        v['label303'].text = str(old_dict[segment]['historical_data']['information']['athlete_segment_stats']['effort_count'])
+        v['label304'].text = str(old_dict[segment]['historical_data']['cr']['hms'])
         v['label305'].text = str(old_dict[segment]['historical_data']['Jonathan']['hms'] - old_dict[segment]['cr']['hms'])
+        v['label306'].text = str(old_dict[segment]['historical_data']['cr']['athlete_name'])
+        v['label307'].text = str(old_dict[segment]['historical_data']['cr']['start_time'])
     else:
         v['label300'].text = str()
         v['label301'].text = str()
         v['label302'].text = str()
+        v['label303'].text = str()
+        v['label304'].text = str()
         v['label305'].text = str()
+        v['label306'].text = str()
+        v['label307'].text = str()
 
     v['label100'].text = str("My Time:")
     v['label200'].text = str(old_dict[segment]['Jonathan']['hms']) #my time

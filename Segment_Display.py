@@ -109,6 +109,7 @@ def set_button_titles(v,old_dict): #this is passed display dict not old dict
         button_dict[label_title] = segment #save button with segment id
         v[button_name].title = label_title #set titles for buttons
         v[button_name].action = seg_button_pressed
+        v[button_name].color = 'blue'
 
     return button_dict
 
