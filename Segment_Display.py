@@ -25,8 +25,8 @@ sp = 15 #spacing
 smg = 5 #side margin
 tmg = 20 #top_margin
 
-v = ui.load_view()
-v = ui.View(frame = (0,0,w,h))
+v = ui.load_view() #this grabs UI elements from pyUI file
+#v = ui.View(frame = (0,0,w,h)) #this creates a new view without UI file
 v.background_color = "#FC4C02" #strava orange
 
 label_view =  ui.ScrollView(frame=(smg, tmg, w/2, h), background_color='white')
@@ -138,7 +138,7 @@ def set_button_titles(v,old_dict): #this is passed display dict not old dict
         label_view.add_subview(button_name)
 
     label_view.content_size = (w/2,(tmg+sp)*len(button_dict)+bh+sp)
-
+    v.add_subview(label_view)
     return button_dict
 
 def open_url(sender):
