@@ -23,16 +23,14 @@ bh = 32 #button height
 bw = w/2 #button width
 sp = 15 #spacing
 smg = 5 #side margin
-tmg = 20 #top_margin
+tmg = 70 #top_margin for label_view
 
 v = ui.load_view() #this grabs UI elements from pyUI file
 #v = ui.View(frame = (0,0,w,h)) #this creates a new view without UI file
 v.background_color = "#FC4C02" #strava orange
 
 label_view =  ui.ScrollView(frame=(smg, tmg, w/2, h), background_color='white')
-
 v.present(style='sheet', hide_title_bar=True)
-
 v['Refresh'].title = "Loading..." #this works
 
 dictionary_file = Path('./History.dict')
@@ -122,7 +120,8 @@ def set_button_titles(v,old_dict): #this is passed display dict not old dict
         label_title = str(old_dict[segment]['information']['name']) + " ("+str(old_dict[segment]['Jonathan']['rank'])+")"
         button_dict[label_title] = segment #save button with segment id
 
-        btn_tmg = (tmg+sp)*n #determine y position
+        #btn_tmg = (tmg+sp)*n #determine y position
+        btn_tmg = (sp+bh)*n #spacing plus button height times n
         button_name = ui.Button(name = button_name, bg_color ='white', frame = (0, btn_tmg, bw, bh))
         button_name.border_width = 1
         button_name.tint_color = 'black'#"RGBA(1.000000,0.285714,0.000000,1.000000)"
