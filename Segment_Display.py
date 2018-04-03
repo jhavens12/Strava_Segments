@@ -87,14 +87,7 @@ def download_data():
         pickle.dump(old_dict, pickle_out) #save old_dict as it has all of the data
         pickle_out.close()
 
-    # #checks to see if there are more entries than labels
-    # if len(display_dict) > 14:
-    #     v.close() #close view
-    #     print("You have too many starred segments, unstar some and try again")
-    #     sys.exit()
-
     return display_dict
-#display information down ehre
 
 def refresh(sender):
     v['Refresh'].title = "Loading..."
