@@ -66,7 +66,8 @@ def segment_efforts(athlete_id):
     param = {'per_page':200, 'page':1}
     dataset = requests.get(url, headers=header, params=param).json()
     print("SEGMENT EFFORTS")
-    pprint(dataset)
+    return dataset
+    #pprint(dataset)
 
 def my_friends(athlete_id):
     url = 'https://www.strava.com/api/v3/athletes/'+athlete_id+'/friends'
