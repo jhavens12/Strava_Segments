@@ -29,10 +29,10 @@ yag = yagmail.SMTP( gmail_user, gmail_password)
 
 my_athlete_id = credentials.my_athlete_id
 
-dictionary_file = Path('./History.dict')
+dictionary_file = Path(credentials.dictionary_path)
 
 if dictionary_file.is_file():
-    pickle_in = open(dictionary_file,"rb")
+    pickle_in = open(str(dictionary_file),"rb")
     old_dict = pickle.load(pickle_in)
 else:
     f=open(dictionary_file,"w+") #create file
