@@ -9,6 +9,7 @@ import datetime
 from pathlib import Path
 import pickle
 import yagmail
+import datetime
 
 def convert_pace(distance,elapsed):
     minutes = elapsed/60
@@ -35,7 +36,7 @@ if dictionary_file.is_file():
     pickle_in = open(str(dictionary_file),"rb")
     old_dict = pickle.load(pickle_in)
 else:
-    f=open(dictionary_file,"w+") #create file
+    f=open(str(dictionary_file),"w+") #create file
     f.close()
     old_dict = {}
 
@@ -150,14 +151,17 @@ if improve_list or decrease_list:
 
     email_body = improve_list + decrease_list
     real_send = "\n".join(email_body)
-    yag.send('jhavens12@gmail.com', 'Strava Segment Update', [real_send])
+    d_date = datetime.datetime.now()
+    reg_format_date = str(d_date.strftime("%Y-%m-%d %I:%M:%S %p"))
+    title = "Segment Update: "+reg_format_date
+    yag.send('jhavens12@gmail.com', title, [real_send])
 
 else:
     print("There are no updates at this time")
 
 #save to the history file - use OLD_DICT as its what we've updated above
-with open(dictionary_file, 'w') as outfile:
+with open(str(dictionary_file), 'w') as outfile:
     #json.dump(history_dict, outfile)
-    pickle_out = open(dictionary_file,"wb")
+    pickle_out = open(str(dictionary_file),"wb")
     pickle.dump(old_dict, pickle_out)
     pickle_out.close()
