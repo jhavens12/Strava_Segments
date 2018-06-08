@@ -53,19 +53,22 @@ for new_seg in new_dict:
 
                 if new_dict[new_seg]['Jonathan']['rank'] > old_dict[old_seg]['Jonathan']['rank']:
                     decrease_list.append("<b><font size='+1'>"+str(old_dict[old_seg]['information']['name'])+str('</font></b>'))
-                    decrease_list.append("ID: https://www.strava.com/segments/"+str(new_seg))
-                    decrease_list.append("App: strava://segments/"+str(new_seg))
+                    link = "https://www.strava.com/segments/"+str(new_seg)
+                    decrease_list.append("<a href="+link+">Strava Website</a>")
+                    link = "strava://segments/"+str(new_seg)
+                    #decrease_list.append("<a href="+link+">Strava App</a>")
                     decrease_list.append('')
                     decrease_list.append("Time: "+str(old_dict[old_seg]['Jonathan']['hms']))
                     decrease_list.append("Pace: "+convert_dec_time(convert_pace(new_dict[new_seg]['information']['distance'],new_dict[new_seg]['Jonathan']['elapsed_time'])))
+                    decrease_list.append("Date Set: "+str(old_dict[old_seg]['Jonathan']['start_time']))
                     decrease_list.append('')
                     decrease_list.append("Old Rank: "+str(old_dict[old_seg]['Jonathan']['rank'])+"/"+str(old_dict[old_seg]['entries']))
                     decrease_list.append("New Rank: "+str(new_dict[new_seg]['Jonathan']['rank'])+"/"+str(new_dict[new_seg]['entries']))
                     decrease_list.append('')
-                    decrease_list.append("Old Date: "+str(old_dict[old_seg]['Jonathan']['start_time']))
+
                     #decrease_list.append("New Time: "+str(new_dict[new_seg]['Jonathan']['hms']))
-                    decrease_list.append("New Date: "+str(new_dict[new_seg]['Jonathan']['start_time']))
-                    decrease_list.append('')
+                    #decrease_list.append("New Date: "+str(new_dict[new_seg]['Jonathan']['start_time']))
+                    #decrease_list.append('')
                     decrease_list.append("CR: "+str(new_dict[new_seg]['cr']['athlete_name']))
                     decrease_list.append("Time: "+str(new_dict[new_seg]['cr']['hms']))
                     decrease_list.append("Date: "+str(new_dict[new_seg]['cr']['start_time']))
@@ -79,7 +82,7 @@ for new_seg in new_dict:
                         decrease_list.append("<font size='+1'>SUSPECT SPEED DETECTED!</font>")
                         decrease_list.append('')
 
-                    decrease_list.append("Speed (Mph): "+str("{0:.2f}".format(miles_per_hour)))
+                    #decrease_list.append("Speed (Mph): "+str("{0:.2f}".format(miles_per_hour)))
                     decrease_list.append("Pace: "+convert_dec_time(convert_pace(new_dict[new_seg]['information']['distance'],new_dict[new_seg]['cr']['elapsed_time'])))
                     decrease_list.append('')
                     decrease_list.append("CR Difference: "+str(new_dict[new_seg]['Jonathan']['hms'] - new_dict[new_seg]['cr']['hms']))
@@ -88,8 +91,10 @@ for new_seg in new_dict:
 
                 if new_dict[new_seg]['Jonathan']['rank'] < old_dict[old_seg]['Jonathan']['rank']:
                     improve_list.append("<b><font size='+1'>"+str(old_dict[old_seg]['information']['name'])+str('</font></b>'))
-                    improve_list.append("ID: https://www.strava.com/segments/"+str(new_seg))
-                    improve_list.append("App: strava://segments/"+str(new_seg))
+                    link = "https://www.strava.com/segments/"+str(new_seg)
+                    improve_list.append("<a href="+link+">Strava Website</a>")
+                    link = "http://strava://segments/"+str(new_seg)
+                    #improve_list.append("<a href="+link+">Strava App</a>")
                     improve_list.append('')
                     improve_list.append("Improved by: "+str( old_dict[old_seg]['Jonathan']['hms'] - new_dict[new_seg]['Jonathan']['hms'] ))
                     improve_list.append("Old Time: "+str(old_dict[old_seg]['Jonathan']['hms']))
@@ -122,15 +127,19 @@ for new_seg in new_dict:
                     improve_list.append("************************")
                     improve_list.append('')
 
+                #need to wipe out previous historical_data if exists so it doesn't create a big chain
+                historical_data = old_dict[old_seg] #grab old data
+                old_dict[old_seg] = new_dict[new_seg] #erase old data and input new data
+                old_dict[old_seg]['historical_data'] = historical_data #set old data to "historical"
+                old_dict[old_seg]['historical_data']['timestamp'] = datetime.datetime.now() #add timestamp as to when
 
-                old_dict[old_seg]['Jonathan_old'] = old_dict[old_seg]['Jonathan'] #store old jonathan as jonathan_old
-                old_dict[old_seg]['Jonathan_old']['change_occurred'] = datetime.datetime.now() #timestamp it
+                #old_dict[old_seg]['Jonathan_old'] = old_dict[old_seg]['Jonathan'] #store old jonathan as jonathan_old
+                #old_dict[old_seg]['Jonathan_old']['change_occurred'] = datetime.datetime.now() #timestamp it
+
     if new_seg not in old_dict: #what about if we star a new segment? need to save it to old_dict
         #print("We have a new starred segment: "+str(new_dict[new_seg]['information']['name']))
         old_dict[new_seg] = new_dict[new_seg] #save new segment in old dict
 
-#improve_list.append("<b><font size='+2'>IMPROVED Segments:</font></b>\n\n")
-#decrease_list.append("<b><font size='+2'>DECREASED Segments:</font></b>\n\n")
 
 if improve_list or decrease_list:
     print("We have updated data to share")
@@ -146,7 +155,7 @@ if improve_list or decrease_list:
 else:
     print("There are no updates at this time")
 
-#save to the history file - use OLD_DICT
+#save to the history file - use OLD_DICT as its what we've updated above
 with open(dictionary_file, 'w') as outfile:
     #json.dump(history_dict, outfile)
     pickle_out = open(dictionary_file,"wb")
